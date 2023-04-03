@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Graphiques" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="03ab3694-169c-41d3-b591-874db890790c">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cGVyc29ubmUgQVMgLDE5NSwxNSwxZmRlNzViNS1mM2FhLTQzNGQtODBmNC1hMGZlZDM3MzA2MDU7
+Y2F0ZWdvcmllIEFTICwzNiwxNyw1YjE2MDQ1NC1hZjEyLTQ2NGUtYTc0ZC1lZGZlMzM5OGE0NDU7]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Tuto Contacts"/>
+	<subDataset name="Catégories" uuid="922bcb73-5059-43b9-971a-e757d66b5939">
+		<property name="com.jaspersoft.studio.data.sql.tables">
+			<![CDATA[cGVyc29ubmUgQVMgLDE1LDE1LDhhMWMwZTk0LTM3MTgtNDQ2OC1hNTk2LTVhNDRjM2UxYmFhMjtj
+YXRlZ29yaWUgQVMgLDE1OSwyOCw4ZTE5OWFiNC02ZjhmLTQzYmItYWM1Yy1hMGU0ZjYzMWFlMjA7]]>
+		</property>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Tuto Contacts"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT  COUNT(p) AS nbpersonnes,
+	c.libelle,
+	c.idcategorie
+FROM categorie AS c
+	LEFT OUTER JOIN personne AS p ON 
+	 p.idpersonne = c.idcategorie 
+GROUP BY c.idcategorie
+ORDER BY c.libelle DESC]]>
+		</queryString>
+		<field name="nbpersonnes" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="nbpersonnes"/>
+			<property name="com.jaspersoft.studio.field.label" value="nbpersonnes"/>
+		</field>
+		<field name="libelle" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="libelle"/>
+			<property name="com.jaspersoft.studio.field.label" value="libelle"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="categorie"/>
+		</field>
+		<field name="idcategorie" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="idcategorie"/>
+			<property name="com.jaspersoft.studio.field.label" value="idcategorie"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="categorie"/>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT COUNT( p.idpersonne) AS nbPersonnes,
+	c.idcategorie,
+	c.libelle
+FROM personne AS p
+	RIGHT OUTER JOIN categorie AS c ON 
+	 p.idcategorie = c.idcategorie 
+GROUP BY c.idcategorie
+ORDER BY c.libelle ASC]]>
+	</queryString>
+	<field name="nbpersonnes" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="nbpersonnes"/>
+		<property name="com.jaspersoft.studio.field.label" value="nbpersonnes"/>
+	</field>
+	<field name="idcategorie" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idcategorie"/>
+		<property name="com.jaspersoft.studio.field.label" value="idcategorie"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categorie"/>
+	</field>
+	<field name="libelle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="libelle"/>
+		<property name="com.jaspersoft.studio.field.label" value="libelle"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categorie"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch"/>
+	</title>
+	<summary>
+		<band height="600" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<pie3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="0" width="544" height="260" uuid="76df8770-d73b-4e73-83ae-0fa1e3597ee6"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Catégories" uuid="280e3e69-b9f3-48ec-ba47-f365e9161726">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{libelle}]]></keyExpression>
+					<valueExpression><![CDATA[$F{nbpersonnes}]]></valueExpression>
+					<labelExpression><![CDATA[$F{libelle}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+			<bar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement x="30" y="299" width="481" height="171" uuid="b62ad574-e0ae-4ea4-8ef2-a9d26fc40bbe"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Catégories" uuid="ce0b5d55-bc67-4272-bea2-ef4c75a62371"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{libelle}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{libelle}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{nbpersonnes}]]></valueExpression>
+						<labelExpression><![CDATA[$F{libelle}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>
